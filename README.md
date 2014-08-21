@@ -108,7 +108,7 @@ Tableau Server Configuration
 ----
 This application leverages Tableau **Trusted Authentication** to enable the user specified in the config file to connect and execute reports. Please review the [documentation] on same, and configure Tableau to trust the IP address or Machine Name of the box which runs this application. 
 
-Ricense
+License
 ----
 
 MIT
