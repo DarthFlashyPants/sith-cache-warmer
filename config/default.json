@@ -2,10 +2,10 @@
 { 
 "ServerInfo": {
     "ServerConfig": {
-      "host": "http://wintableau",
+      "host": "http://yourserver",
       "username": "Anakin",
-      "reload": "1200000",
-      "executions": "3"    
+      "reload": "2700000",
+      "executions": "1"    
     }
 },
     "Reports": [

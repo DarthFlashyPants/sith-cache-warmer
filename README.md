@@ -9,13 +9,6 @@ A completely unsupported app which will warm your Tableau VizQL Server processes
 
 A Sith's Cache Warmer simply calls reports you specify on a regular basis. Doing so over time (generally) will populate the cache of each VizQL on your Tableau Server, increasing the perceived performance of Tableau Server for your users.  It is a Node.JS module that utilizes [PhantomJS] as a headless browser to hit your pages [Markdown site] [1]:
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable 
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
 
 Reasons Not To Use This Tool
 -----
@@ -37,7 +30,7 @@ Installation
 --------------
 
  - To begin, you must download and install [Node.Js] for your operating system
- - Then, head to [PhantomJS] to download and install the the distiruvtion for the OS you're running
+ - Then, head to [PhantomJS] to download and install the the distribution for the OS you're running
  - Next, download the code using the **Download** button to your right
  - Unzip to the folder of your choice, and navigate there on the command-line
  - Execute these commands to prepare the app
@@ -74,7 +67,7 @@ Modify these settings in **\config\default.json**:
 
 Do NOT do something foolish and set this to a low value like 10 minutes. 
 
-** executions**: The number of times each report will get executed. Should be set to at least 1x times the number of VizQLs on your machine. For best effect, set between 1.5x - 2x: 2 VizQLS = 3-4 executions, 3 VizQLs =   5-6 executions
+**executions**: The number of times each report will get executed. Default is 1
 
 #### Reports section
 Use this area to define each report you wish to execute. Example:
@@ -90,11 +83,11 @@ Launch the report named "Growth of Walmart" in the defaul site.  The report is f
 
         {
            "reportName": "The Hello Viz",
-            "reportURL": "/views/Foo/Hello2?:refresh=yes&Region=West",
+            "reportURL": "/views/Foo/Hello2?:Region=West",
             "reportSite": ""
         },
 
-Execute "The Hello Viz" found at /views/Foo/Hello. Refresh data and filter down to the West region.
+Execute "The Hello Viz" found at /views/Foo/Hello. Filter down to the West region.
 
         {
            "reportName": "Rainy days and Mondays always get me down",
@@ -112,7 +105,6 @@ License
 ----
 
 MIT
-
 
 **Free Software, Hell Yeah!**
 
