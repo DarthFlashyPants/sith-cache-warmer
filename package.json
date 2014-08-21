@@ -1,0 +1,14 @@
+{
+  "name": "SithCacheWarmer",
+  "description": "Warm Tableau Server's Cache",
+  "version": "1.0.0",
+  "dependencies": {
+    "node-jsxml": "0.x",
+    "phantomjs": "1.9.x",
+    "request": "2.x",
+    "config": "1.0.x",
+    "phantom": "0.6.x",
+    "node-random": "1.0.x"       
+      
+  }
+}

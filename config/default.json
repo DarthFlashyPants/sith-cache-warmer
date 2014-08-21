@@ -1,0 +1,49 @@
+
+{ 
+"ServerInfo": {
+    "ServerConfig": {
+      "host": "http://wintableau",
+      "username": "Anakin",
+      "reload": "1200000",
+      "executions": "3"    
+    }
+},
+    "Reports": [
+        {
+            "reportName": "SAT Performance",
+            "reportURL": "/views/Variety/SATPerformance",
+            "reportSite": ""
+        },
+        {
+            "reportName": "US Sales Forecast",
+            "reportURL": "/views/Sales/SalesForecast",
+            "reportSite": ""
+        },
+        {
+            "reportName": "Military Strength",
+            "reportURL": "/views/Variety/USMilitaryStrength2012",
+            "reportSite": ""
+        },
+        {
+           "reportName": "Military Strength - Navy",
+            "reportURL": "/views/Variety/USMilitaryStrength2012?Select Organization=Navy",
+            "reportSite": ""
+        },
+        {
+            "reportName": "Economic Indicators",
+            "reportURL": "/views/Finance/EconomicIndicators",
+            "reportSite": ""
+       },
+        {
+            "reportName": "Live SQL Server Report",
+            "reportURL": "/views/LiveSQLServerReport/Dashboard1",
+            "reportSite": ""
+       }
+//        {
+//           "reportName": "PURPOSEFULLY BROKEN to test problem logic",
+//            "reportURL": "/views/woohoo/jediweaksauce",
+//            "reportSite": ""
+//        }  
+                
+    ]
+}
