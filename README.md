@@ -95,7 +95,7 @@ Execute "The Hello Viz" found at /views/Foo/Hello. Filter down to the West regio
             "reportSite": "Site3"
         },
 
-Execute a dashboard named after the best song ever and refresh data This report lives a Tableau multi-tenant site with an ID of "Site3". Does the username you specified in **username** have access to this site? They should.
+Execute a dashboard named after the best song ever and refresh data This report lives in a Tableau multi-tenant site with an ID of "Site3". Does the username you specified in **username** have access to this site? They should.
 
 Tableau Server Configuration
 ----
@@ -112,14 +112,18 @@ FAQ
 ----
 ####Reports come back "out of order" in the display. Why?
 The order in which reports are executed against Tableau is irrelevant in terms of the order they'll return - each report takes a different amount of time to complete, after all. 
-####Explain wh using :refresh=yes on my URL could be a bad idea, please?
+####Explain why using :refresh=yes on my URL could be a bad idea, please?
 :refresh=yes expires the cache on the vizqlserver process it is executed against. This means each time it is used, it wipes out whatever was already cached. If you cache 3 reports and use :refresh=yes on the third, you are most likely de-caching the first two vizzes you just STUCK in cache a second ago. You just wasted your time.
-####When I run the app, one (or more?) of my reports finishes with: *' ' load complete*. Closing page. Why?
+####When I run the app, one (or more) of my reports finishes with: *' ' load complete*. Closing page. Why?
 Generally, this means one of two things: 
- - The report that you're asking for lives in a non-default site, and you forgot to set the **reporSite** attribute in the config file
+ - The report that you're asking for lives in a non-default site, and you forgot to set the **reportSite** attribute in the config file
  - The user you are logging in with does not have permissions on the report you are trying to run or doesn't have permissions to get into the site.
+####Please explain why it is useless to execute the same viz a bunch of times in a row during a single "execution round"?
+There is no real reason to request the same viz multiple times in a row since you’ll just end up in a shared session anyway – you WON’T actually be exercising multiple VizQLs by asking for the same viz two/three/four times in a row. Be patient, acolyte. Instead, execute each report ONCE every x minutes with x being a number above the timeout period for wgserver.session_idle_limit and vizqlserver.session.expiry.timeout. That way, the session (and vizql it is bound to) you hit last time will aready be dead and cleaned up. Therefore, a NEW vizql session will get bootstrapped - and this new session willl (hopefully) get created on a different vizql than the last one. 
+
 
 Thanks, [Darth FlashyPants]
+
 [PhantomJS]:http://phantomjs.org
 [Node.js]:http://nodejs.org/
 [Darth FlashyPants]:http://twitter.com/lordflashypants
