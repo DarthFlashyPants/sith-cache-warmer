@@ -118,6 +118,7 @@ The order in which reports are executed against Tableau is irrelevant in terms o
 Generally, this means one of two things: 
  - The report that you're asking for lives in a non-default site, and you forgot to set the **reportSite** attribute in the config file
  - The user you are logging in with does not have permissions on the report you are trying to run or doesn't have permissions to get into the site.
+ 
 ####Please explain why it is useless to execute the same viz a bunch of times in a row during a single "execution round"?
 There is no real reason to request the same viz multiple times in a row since you’ll just end up in a shared session anyway – you WON’T actually be exercising multiple VizQLs by asking for the same viz two/three/four times in a row. Be patient, acolyte. Instead, execute each report ONCE every x minutes with x being a number above the timeout period for wgserver.session_idle_limit and vizqlserver.session.expiry.timeout. That way, the session (and vizql it is bound to) you hit last time will aready be dead and cleaned up. Therefore, a NEW vizql session will get bootstrapped - and this new session willl (hopefully) get created on a different vizql than the last one. 
 
