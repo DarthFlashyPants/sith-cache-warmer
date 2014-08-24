@@ -7,7 +7,7 @@ A completely unsupported app which will warm your Tableau VizQL Server processes
   - Repeats report execution on a user-defined interval 
   - Executes multiple requests for the same report in an attempt to populate caches across all processes
 
-A Sith's Cache Warmer simply calls reports you specify on a regular basis. Doing so over time (generally) will populate the cache of each VizQL on your Tableau Server, increasing the perceived performance of Tableau Server for your users.  It is a Node.JS module that utilizes [PhantomJS] as a headless browser to hit your pages [Markdown site] [1]:
+A Sith's Cache Warmer simply calls reports you specify on a regular basis. Doing so over time (generally) will populate the cache of each VizQL on your Tableau Server, increasing the perceived performance of Tableau Server for your users.  It is a Node.JS module that utilizes [PhantomJS] as a headless browser to hit your pages:
 
 
 Reasons Not To Use This Tool
@@ -58,7 +58,8 @@ Modify these settings in **\config\default.json**:
 
 **host**: The location to your Tableau Server. Include http:// or https:// on the URL
 
-**username**: The username which will be used to connect to Tableau Server and request reports
+**username**: The username which will be used to connect to Tableau Server and request reports. Make sure this username has permissions on all sites which contain workbooks you'll be exercising.
+
 **reload**: The interval, in milliseconds that the script waits to re-request reports. 
 
 >Examples: 
@@ -67,7 +68,7 @@ Modify these settings in **\config\default.json**:
 
 Do NOT do something foolish and set this to a low value like 10 minutes. 
 
-**executions**: The number of times each report will get executed. Default is 1
+**executions**: The number of times each report will get executed in a single time interval. Default is 1
 
 #### Reports section
 Use this area to define each report you wish to execute. Example:
@@ -79,7 +80,7 @@ Use this area to define each report you wish to execute. Example:
         },
 
 
-Launch the report named "Growth of Walmart" in the defaul site.  The report is found at  /views/Sales/GrowthofWalmart on the Tableau Server. Use the :refresh=yes parameter
+Launch the report named "Growth of Walmart" in the default site.  The report is found at  /views/Sales/GrowthofWalmart on the Tableau Server. Use the :refresh=yes parameter to force "latest and greatest" data to be acquired.
 
         {
            "reportName": "The Hello Viz",
@@ -95,11 +96,11 @@ Execute "The Hello Viz" found at /views/Foo/Hello. Filter down to the West regio
             "reportSite": "Site3"
         },
 
-Execute a dashboard named after the best song ever and refresh data This report lives in a Tableau multi-tenant site with an ID of "Site3". Does the username you specified in **username** have access to this site? They should.
+Execute a dashboard named after the best song ever and refresh data. This report lives in a Tableau multi-tenant site with an ID of "Site3". Does the username you specified in **username** have access to this site? It needs to.
 
 Tableau Server Configuration
 ----
-This application leverages Tableau **Trusted Authentication** to enable the user specified in the config file to connect and execute reports. Please review the [documentation] on same, and configure Tableau to trust the IP address or Machine Name of the box which runs this application. 
+This application leverages Tableau **Trusted Authentication** to enable the user specified in the config file to connect to and execute reports. Please review the [documentation] on same, and configure Tableau to trust the IP address or Machine Name of the box which runs this application. 
 
 License
 ----
@@ -114,7 +115,7 @@ FAQ
 The order in which reports are executed against Tableau is irrelevant in terms of the order they'll return - each report takes a different amount of time to complete, after all. 
 ####Explain why using :refresh=yes on my URL could be a bad idea, please?
 :refresh=yes expires the cache on the vizqlserver process it is executed against. This means each time it is used, it wipes out whatever was already cached. If you cache 3 reports and use :refresh=yes on the third, you are most likely de-caching the first two vizzes you just STUCK in cache a second ago. You just wasted your time.
-####When I run the app, one (or more) of my reports finishes with: *' ' load complete*. Closing page. Why?
+####When I run the app, one (or more) of my reports finishes with: *' ' load complete. Closing page*. Why?
 Generally, this means one of two things: 
  - The report that you're asking for lives in a non-default site, and you forgot to set the **reportSite** attribute in the config file
  - The user you are logging in with does not have permissions on the report you are trying to run or doesn't have permissions to get into the site.
