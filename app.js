@@ -27,7 +27,7 @@ var user = tableau.get('ServerConfig.username');
 var interval = tableau.get('ServerConfig.reload');
 var executions = tableau.get('ServerConfig.executions');   
 
-console.log("I will be connecting to " + tableauServer + " as user '" + user + "'" + " in " + interval.toString() + " ms, executing each report " + executions + " times.");
+console.log("I will be connecting to " + tableauServer + " as user '" + user + "'" + " every " + interval.toString() + " ms, executing each report " + executions + " time(s).");
 
 // Info about reports
 var reports = config.get('Reports');
@@ -171,7 +171,7 @@ function createPhantomSession (callback) {
     console.log("Session Exists");
     return callback(null, session);
   } else {
-    console.log("Creating new Session");
+    console.log("Creating New Browser Session");
     require('phantom').create({dnodeOpts: {weak: false}}, function(_session) {
       session = _session;
        callback(null, session);
